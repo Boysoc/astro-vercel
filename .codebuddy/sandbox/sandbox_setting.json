@@ -1,0 +1,20 @@
+{
+  "path": "d:\\工作\\Github\\pagecho.github.io-main\\dist",
+  "desc": "这是 Xio's 的个人博客，基于 Astro 框架构建，完全移植了 Typecho Navy 主题。博客包含完整的文章系统、智能分类、实时搜索功能，以及美观的 404 页面。支持 Markdown 文章渲染、标签云、分类导航等功能。包含从2007年到2025年的所有博客文章，完整保留了博主的写作历程。",
+  "id": "24fb31c423d845b388c67e0b7aa4514a",
+  "data": {
+    "spaceKey": "24fb31c423d845b388c67e0b7aa4514a",
+    "connections": {
+      "webIDE": "https://24fb31c423d845b388c67e0b7aa4514a.ap-singapore.cloudstudio.club",
+      "preview": "https://24fb31c423d845b388c67e0b7aa4514a--{port}.ap-singapore.cloudstudio.club",
+      "api": "https://24fb31c423d845b388c67e0b7aa4514a--api.ap-singapore.cloudstudio.club",
+      "pty": "https://24fb31c423d845b388c67e0b7aa4514a--pty.ap-singapore.cloudstudio.club"
+    }
+  },
+  "config": {
+    "api": "https://24fb31c423d845b388c67e0b7aa4514a--api.ap-singapore.cloudstudio.club",
+    "pty": "https://24fb31c423d845b388c67e0b7aa4514a--pty.ap-singapore.cloudstudio.club",
+    "region": "ap-shanghai",
+    "spaceKey": "24fb31c423d845b388c67e0b7aa4514a"
+  }
+}

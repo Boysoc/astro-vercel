@@ -1,0 +1,134 @@
+---
+import { SITE } from "@config";
+import Hr from "./Hr.astro";
+
+export interface Props {
+  activeNav?: "posts" | "archives" | "about" | "links";
+}
+
+const { activeNav } = Astro.props;
+---
+
+<header id="header">
+  <div class="site-name">
+    <a id="logo" href="/">
+      Xio<span>'s</span>
+    </a>
+    <h1>Xio's</h1>
+    <p class="description">一切从简，记录生活。</p>
+  </div>
+  
+  <nav id="nav-menu">
+    <a href="/" class={activeNav === "posts" ? "current" : ""}>首页</a>
+    <a href="/archives" class={activeNav === "archives" ? "current" : ""}>归档</a>
+    <a href="/about" class={activeNav === "about" ? "current" : ""}>关于</a>
+    <a href="/links" class={activeNav === "links" ? "current" : ""}>邻居</a>
+  </nav>
+</header>
+
+<style>
+  /* 确保导航居中和响应式设计 */
+  #header {
+    text-align: center;
+    padding: 64px 0 0;
+  }
+  
+  .site-name h1 {
+    padding: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  
+  #logo {
+    font: bold 44px/1.22 "Times New Roman", Georgia, Times, sans-serif;
+    color: #555;
+    text-decoration: none;
+  }
+  
+  #logo span {
+    color: #777;
+  }
+  
+  #logo:hover {
+    color: #777;
+  }
+  
+  .description {
+    margin: 0;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  #nav-menu {
+    padding: 0;
+    margin: 28px 0 10px;
+    text-align: center;
+  }
+  
+  #nav-menu a {
+    text-decoration: none;
+    padding: 7px 18px 6px;
+    color: #fff;
+    background-color: #999;
+    position: relative;
+    z-index: 4;
+    font-size: 14px;
+    line-height: 1.5;
+    display: inline-block;
+    margin: 0;
+  }
+  
+  #nav-menu a:first-child {
+    border: none;
+  }
+  
+  #nav-menu a.current {
+    background-color: #303538;
+  }
+  
+  #nav-menu a.current:after {
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid #303538;
+    bottom: -6px;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 3;
+    height: 0;
+    text-align: center;
+    left: 50%;
+    margin-left: -14px;
+    width: 0;
+  }
+  
+  #nav-menu a:hover {
+    background-color: #303538;
+  }
+  
+  /* 响应式设计 */
+  @media print, screen and (max-width: 680px) {
+    #nav-menu a {
+      padding: 0 15px;
+      line-height: 27px;
+      height: 27px;
+      font-size: 13px;
+    }
+    
+    #logo {
+      font-size: 36px;
+    }
+  }
+  
+  @media print, screen and (max-width: 500px) {
+    #nav-menu a {
+      padding: 0 12px;
+      font-size: 12px;
+    }
+    
+    #logo {
+      font-size: 32px;
+    }
+  }
+</style>

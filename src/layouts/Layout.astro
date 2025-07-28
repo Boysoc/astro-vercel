@@ -1,0 +1,427 @@
+---
+export interface Props {
+  title?: string;
+  author?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  pubDatetime?: Date;
+  modDatetime?: Date | null;
+  scrollSmooth?: boolean;
+}
+
+const {
+  title = "Xio's",
+  author = "Xio",
+  description = "一切从简，记录生活。",
+  ogImage = "/assets/images/og-image.png",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  pubDatetime,
+  modDatetime,
+  scrollSmooth = false,
+} = Astro.props;
+
+const socialImageURL = new URL(
+  ogImage ?? "/assets/images/og-image.png",
+  Astro.url.origin
+).href;
+---
+
+<!doctype html>
+<html lang="zh-cn" class={scrollSmooth ? "scroll-smooth" : ""}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- General Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+
+    <!-- Article Published/Modified time -->
+    {
+      pubDatetime && (
+        <meta
+          property="article:published_time"
+          content={pubDatetime.toISOString()}
+        />
+      )
+    }
+    {
+      modDatetime && (
+        <meta
+          property="article:modified_time"
+          content={modDatetime.toISOString()}
+        />
+      )
+    }
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- 引入 Navy 主题的核心样式 -->
+    <link rel="stylesheet" href="/assets/normalize.min.css" />
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta name="theme-color" content="" />
+
+    {
+      // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
+      // include google-site-verification tag in the heading
+      // Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
+      import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION && (
+        <meta
+          name="google-site-verification"
+          content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION}
+        />
+      )
+    }
+
+    <script is:inline src="/toggle-theme.js"></script>
+    
+    <!-- 控制台自定义信息 -->
+    <script is:inline>
+      // 控制台艺术字和信息
+      console.log('%c', 'font-size:1px; padding:100px 150px; background:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzMzMzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+bjJnLmNuPC90ZXh0Pgo8L3N2Zz4K") no-repeat;');
+      
+      console.log('%c🎉 欢迎来到 n2g.cn！', 'color: #ff6b6b; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+      
+      console.log('%c📝 一切从简，记录生活', 'color: #4ecdc4; font-size: 16px; font-style: italic;');
+      
+      console.log('%c💻 如果你是开发者，欢迎查看源码！', 'color: #45b7d1; font-size: 14px;');
+      
+      console.log('%c🔍 发现了什么有趣的东西吗？', 'color: #96ceb4; font-size: 14px;');
+      
+      console.log('%c📧 联系我: boysoc@qq.com', 'color: #feca57; font-size: 12px;');
+      
+      console.log('%c⭐ GitHub: https://github.com/Boysoc', 'color: #ff9ff3; font-size: 12px;');
+      
+      console.log('%c🚀 Built with Astro & ❤️', 'color: #54a0ff; font-size: 12px;');
+      
+      // 添加一些交互式功能
+      console.log('%c🎮 试试这些命令:', 'color: #5f27cd; font-size: 14px; font-weight: bold;');
+      console.log('%c  • showInfo() - 显示网站信息', 'color: #00d2d3; font-size: 12px;');
+      console.log('%c  • showStats() - 显示网站统计', 'color: #00d2d3; font-size: 12px;');
+      console.log('%c  • surprise() - 给你一个惊喜', 'color: #00d2d3; font-size: 12px;');
+      
+      // 定义一些有趣的函数
+      window.showInfo = function() {
+        console.log('%c📊 网站信息:', 'color: #ff6b6b; font-size: 16px; font-weight: bold;');
+        console.log('🌐 域名: n2g.cn');
+        console.log('🛠️ 技术栈: Astro + TypeScript');
+        console.log('🎨 主题: Navy (自定义)');
+        console.log('📱 响应式: 支持');
+        console.log('🔍 SEO: 优化');
+      };
+      
+      window.showStats = function() {
+        const posts = document.querySelectorAll('.post').length;
+        const links = document.querySelectorAll('a').length;
+        const images = document.querySelectorAll('img').length;
+        
+        console.log('%c📈 页面统计:', 'color: #4ecdc4; font-size: 16px; font-weight: bold;');
+        console.log(`📝 文章数量: ${posts || '加载中...'}`);
+        console.log(`🔗 链接数量: ${links}`);
+        console.log(`🖼️ 图片数量: ${images}`);
+        console.log(`⏰ 访问时间: ${new Date().toLocaleString('zh-CN')}`);
+      };
+      
+      window.surprise = function() {
+        const surprises = [
+          '🎉 你发现了一个彩蛋！',
+          '🦄 独角兽出现了！',
+          '🌟 你获得了开发者徽章！',
+          '🎯 恭喜你，好奇心满分！',
+          '🚀 准备起飞！',
+          '💎 你找到了隐藏的宝石！',
+          '🎪 欢迎来到代码马戏团！',
+          '🎭 你揭开了神秘面纱！'
+        ];
+        const randomSurprise = surprises[Math.floor(Math.random() * surprises.length)];
+        console.log(`%c${randomSurprise}`, 'color: #ff6b6b; font-size: 20px; font-weight: bold; animation: pulse 1s infinite;');
+        
+        // 添加一些视觉效果
+        console.log('%c🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊', 'color: #feca57; font-size: 16px;');
+      };
+      
+      // 检测开发者工具打开 - 使用window resize事件
+      let devtools = {open: false};
+      const threshold = 160;
+      
+      // 使用 window resize 事件替代 ResizeObserver
+      const checkDevTools = () => {
+        const isDevToolsOpen = window.outerHeight - window.innerHeight > threshold || 
+                               window.outerWidth - window.innerWidth > threshold;
+        
+        if (isDevToolsOpen && !devtools.open) {
+          devtools.open = true;
+          console.log('%c🔧 检测到开发者工具已打开！', 'color: #ff6b6b; font-size: 14px; font-weight: bold;');
+          console.log('%c👋 Hello, Developer!', 'color: #4ecdc4; font-size: 12px;');
+        } else if (!isDevToolsOpen && devtools.open) {
+          devtools.open = false;
+        }
+      };
+      
+      // 监听窗口大小变化
+      window.addEventListener('resize', checkDevTools, { passive: true });
+      
+      // 初始检查
+      checkDevTools();
+      
+      // 添加一个小的ASCII艺术
+      console.log(`
+%c    ███╗   ██╗██████╗  ██████╗ 
+    ████╗  ██║╚════██╗██╔════╝ 
+    ██╔██╗ ██║ █████╔╝██║  ███╗
+    ██║╚██╗██║██╔═══╝ ██║   ██║
+    ██║ ╚████║███████╗╚██████╔╝
+    ╚═╝  ╚═══╝╚══════╝ ╚═════╝ 
+                                
+%c        一切从简，记录生活
+      `, 'color: #45b7d1; font-family: monospace; font-size: 12px;', 'color: #96ceb4; font-size: 10px; font-style: italic;');
+    </script>
+  </head>
+  <body>
+    <slot />
+    
+    <!-- 回到顶部按钮 -->
+    <div class="link-back2top" id="back2top" style="display: none;">
+      <a href="#" title="回到顶部"></a>
+    </div>
+    
+    <!-- 全局 Sidebar 控制脚本 -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        // 检测是否为移动端
+        function isMobile() {
+          return window.innerWidth <= 768;
+        }
+        
+        // Sidebar 控制功能
+        let winWidth = 0;
+        
+        function findDimensions() {
+          if (window.innerWidth) {
+            winWidth = window.innerWidth;
+          } else if (document.body && document.body.clientWidth) {
+            winWidth = document.body.clientWidth;
+          }
+          if (document.documentElement && document.documentElement.clientWidth) {
+            winWidth = document.documentElement.clientWidth;
+          }
+        }
+        
+        findDimensions();
+        
+        function showHeadBlock() {
+          const moveBlock = document.querySelector('.move-block');
+          const secondary = document.querySelector('#secondary');
+          const sideClick = document.querySelector('.side-click');
+          
+          if (isMobile()) {
+            // 移动端：弹出 Sidebar
+            if (secondary) {
+              secondary.classList.add('show');
+              document.body.style.overflow = 'hidden';
+            }
+          } else {
+            // 桌面端：滑入 Sidebar
+            if (moveBlock && secondary) {
+              if (winWidth > 1057) {
+                moveBlock.style.marginLeft = '-330px';
+              } else {
+                moveBlock.style.left = '-330px';
+              }
+              secondary.style.right = '0';
+            }
+          }
+          
+          if (sideClick) {
+            sideClick.classList.remove('icon-arrow-down');
+            sideClick.classList.add('icon-cross');
+          }
+        }
+        
+        function hideHeadBlock() {
+          const moveBlock = document.querySelector('.move-block');
+          const secondary = document.querySelector('#secondary');
+          const sideClick = document.querySelector('.side-click');
+          
+          if (isMobile()) {
+            // 移动端：隐藏 Sidebar
+            if (secondary) {
+              secondary.classList.remove('show');
+              document.body.style.overflow = '';
+            }
+          } else {
+            // 桌面端：滑出 Sidebar
+            if (moveBlock && secondary) {
+              moveBlock.style.left = '0px';
+              moveBlock.style.marginLeft = '0px';
+              secondary.style.right = '-330px';
+            }
+          }
+          
+          if (sideClick) {
+            sideClick.classList.remove('icon-cross');
+            sideClick.classList.add('icon-arrow-down');
+          }
+        }
+        
+        // 侧边栏按钮点击事件
+        document.addEventListener('click', function(e) {
+          if (e.target.classList.contains('side-click')) {
+            if (e.target.classList.contains('icon-arrow-down')) {
+              showHeadBlock();
+            } else if (e.target.classList.contains('icon-cross')) {
+              hideHeadBlock();
+            }
+          }
+        });
+        
+        // 移动端遮罩层点击关闭
+        const secondary = document.querySelector('#secondary');
+        if (secondary) {
+          secondary.addEventListener('click', function(e) {
+            if (isMobile() && e.target === this) {
+              hideHeadBlock();
+            }
+          });
+        }
+        
+        // ESC 键关闭
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            const sideClick = document.querySelector('.side-click');
+            if (sideClick && sideClick.classList.contains('icon-cross')) {
+              hideHeadBlock();
+            }
+          }
+        });
+        
+        // 窗口大小改变时重置状态
+        window.addEventListener('resize', function() {
+          findDimensions();
+          
+          const secondary = document.querySelector('#secondary');
+          const sideClick = document.querySelector('.side-click');
+          const moveBlock = document.querySelector('.move-block');
+          
+          if (isMobile()) {
+            // 移动端：重置桌面端样式
+            if (moveBlock) {
+              moveBlock.style.left = '';
+              moveBlock.style.marginLeft = '';
+            }
+            if (secondary) {
+              secondary.style.right = '';
+            }
+          } else {
+            // 桌面端：重置移动端样式
+            if (secondary) {
+              secondary.classList.remove('show');
+            }
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // 回到顶部功能 - 使用节流优化性能
+      const back2top = document.getElementById('back2top');
+      const back2topLink = back2top?.querySelector('a');
+      
+      // 节流函数
+      function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+          }
+        }
+      }
+      
+      // 监听滚动事件 - 使用节流优化性能
+      const handleScroll = throttle(function() {
+        if (window.scrollY > 300) {
+          back2top.style.display = 'block';
+        } else {
+          back2top.style.display = 'none';
+        }
+      }, 100);
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // 点击回到顶部
+      back2topLink?.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* 引入 Navy 主题的完整样式 */
+  @import url('../styles/base.css');
+  
+  /* 调整按钮大小为 26x26px - 覆盖所有可能的样式 */
+  .side-click {
+    width: 26px !important;
+    height: 26px !important;
+    line-height: 26px !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: white !important;
+    border: 1px solid #333 !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* 移动端保持相同大小 */
+  @media (max-width: 768px) {
+    .side-click {
+      width: 26px !important;
+      height: 26px !important;
+      line-height: 26px !important;
+      font-size: 16px !important;
+      top: 15px !important;
+      right: 15px !important;
+    }
+  }
+</style>

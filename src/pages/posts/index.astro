@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Sidebar from "@components/Sidebar.astro";
+import getSortedPosts from "../../utils/getSortedPosts";
+import { SITE } from "../../config";
+
+const posts = await getCollection("blog");
+const sortedPosts = getSortedPosts(posts);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+---
+
+<Layout title={`文章列表 - ${SITE.title}`} description="所有文章列表">
+  <div class="side-click icon-arrow-down"></div>
+  <div class="move-block">
+    <Header />
+    <div id="body">
+      <div class="container">
+        <div class="col-group">
+          <div class="col-8" id="main">
+            <div class="res-cons">
+              <h2 class="archive-title">文章列表</h2>
+              {sortedPosts.map((post) => (
+                <article class="post">
+                  <date class="post-meta">
+                    {formatDate(new Date(post.data.pubDatetime))}
+                  </date>
+                  <header>
+                    <h2 class="post-title">
+                      <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+                    </h2>
+                  </header>
+                  <div class="post-content">
+                    <p>{post.data.description}</p>
+                    <div class="more">
+                      <a href={`/posts/${post.slug}`}>阅读剩余部分 -</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+          <Sidebar />
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</Layout>

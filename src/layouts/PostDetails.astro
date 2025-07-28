@@ -1,0 +1,70 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Sidebar from "@components/Sidebar.astro";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+
+const { title, description, ogImage, canonicalURL, pubDatetime, tags } = post.data;
+
+const { Content } = await post.render();
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  canonicalURL={canonicalURL}
+>
+  <div class="side-click icon-arrow-down"></div>
+  <div class="move-block">
+    <Header />
+    <div id="body">
+      <div class="container">
+        <div class="col-group">
+          <div class="col-8" id="main">
+            <div class="res-cons">
+              <article class="post single-page">
+                <date class="post-meta">
+                  {formatDate(new Date(pubDatetime))}
+                </date>
+                <header>
+                  <h1 class="post-title">{title}</h1>
+                </header>
+                <div class="post-content">
+                  <Content />
+                </div>
+                <footer class="post-footer">
+                  <section class="author">
+                    <div class="author-ava">
+                      <img src="/assets/author-head.gif" alt="Xio" width="160" height="160" />
+                    </div>
+                    <p>一切从简 记录生活</p>
+                  </section>
+                </footer>
+              </article>
+            </div>
+          </div>
+          <Sidebar />
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</Layout>
+
+

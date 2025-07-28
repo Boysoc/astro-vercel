@@ -1,0 +1,84 @@
+---
+---
+<div class="giscus-container">
+  <div id="giscus-placeholder" class="giscus-placeholder">
+    <button id="load-comments" class="load-comments-btn">
+      💬 点击加载评论
+    </button>
+  </div>
+  <div id="giscus-comments" class="giscus" style="display: none;"></div>
+</div>
+
+<style>
+  .giscus-placeholder {
+    text-align: center;
+    padding: 2em 0;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    margin: 2em 0;
+  }
+  
+  .load-comments-btn {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.2s ease;
+  }
+  
+  .load-comments-btn:hover {
+    background: #e8e8e8;
+    border-color: #ccc;
+  }
+  
+  .giscus-loading {
+    text-align: center;
+    padding: 2em 0;
+    color: #999;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadBtn = document.getElementById('load-comments');
+    const placeholder = document.getElementById('giscus-placeholder');
+    const commentsContainer = document.getElementById('giscus-comments');
+    
+    if (loadBtn && placeholder && commentsContainer) {
+      loadBtn.addEventListener('click', function() {
+        // 显示加载状态
+        placeholder.innerHTML = '<div class="giscus-loading">正在加载评论...</div>';
+        
+        // 创建 Giscus 脚本
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'pagecho/pagecho.github.io');
+        script.setAttribute('data-repo-id', 'R_kgDOL1JbLQ');
+        script.setAttribute('data-category', 'Ideas');
+        script.setAttribute('data-category-id', 'DIC_kwDOL1JbLc4CgTn7');
+        script.setAttribute('data-mapping', 'url');
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'bottom');
+        script.setAttribute('data-theme', 'https://n2g.cn/assets/comment.css');
+        script.setAttribute('data-lang', 'zh-CN');
+        script.setAttribute('crossorigin', 'anonymous');
+        script.setAttribute('data-loading', 'lazy');
+        script.async = true;
+        
+        // 监听脚本加载完成
+        script.onload = function() {
+          placeholder.style.display = 'none';
+          commentsContainer.style.display = 'block';
+        };
+        
+        // 将脚本添加到评论容器
+        commentsContainer.appendChild(script);
+      });
+    }
+  });
+</script>

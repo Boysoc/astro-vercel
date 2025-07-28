@@ -55,7 +55,7 @@ const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
                   <p>包含标签 "{tagName}" 的所有文章。</p>
                   
                   <div class="tag-posts">
-                    {paginatedPosts.map((post) => (
+                    {paginatedPosts && paginatedPosts.map((post) => (
                       <article class="post">
                         <date class="post-meta">
                           {new Date(post.data.pubDatetime).toLocaleDateString('zh-CN', { 

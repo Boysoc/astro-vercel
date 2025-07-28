@@ -1,6 +1,7 @@
 export interface PaginationProps {
   currentPage: number;
   totalPages: number;
+  paginatedPosts: any[];
   prevUrl?: string;
   nextUrl?: string;
   firstUrl?: string;
@@ -25,12 +26,18 @@ const getPagination = ({
 
   const currentPage = page ? (typeof page === "string" ? parseInt(page) : page) : 1;
 
+  // 计算当前页的文章
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const paginatedPosts = posts.slice(startIndex, endIndex);
+
   const prevUrl = currentPage > 1 ? (currentPage - 1 === 1 && isIndex ? "/" : `/page/${currentPage - 1}`) : undefined;
   const nextUrl = currentPage < totalPages ? `/page/${currentPage + 1}` : undefined;
 
   return {
     currentPage,
     totalPages,
+    paginatedPosts,
     prevUrl,
     nextUrl,
     firstUrl: "/",

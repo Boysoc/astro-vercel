@@ -35,9 +35,12 @@ const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 const postsByTag = getPostsByTag(posts, tag);
 
+const currentPage = parseInt(page) || 1;
 const pagination = getPagination({
   posts: postsByTag,
-  page,
+  page: currentPage,
+  isIndex: false,
+  postsPerPage: 5,
 });
 ---
 

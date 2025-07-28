@@ -29,13 +29,8 @@ const pagination = getPagination({
   postsPerPage: POSTS_PER_PAGE,
 });
 
-// 获取当前页的文章
-const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-const endIndex = startIndex + POSTS_PER_PAGE;
-const currentPosts = sortedPosts.slice(startIndex, endIndex);
-
 // 为每篇文章生成摘要
-const postsWithExcerpts = currentPosts.map((post) => {
+const postsWithExcerpts = pagination.paginatedPosts.map((post) => {
   const { excerpt, hasMore } = getPostExcerpt(post.body, 20);
   return {
     ...post,

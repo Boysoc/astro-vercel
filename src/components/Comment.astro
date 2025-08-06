@@ -72,7 +72,7 @@
     console.log('初始化Waline，当前主题:', currentTheme);
 
     try {
-      console.log('开始初始化Waline，服务器地址:', 'https://leanvercelwaline.n2g.cn/');
+      console.log('开始初始化Waline，服务器地址:', 'https://tencent.n2g.cn/');
       console.log('当前页面路径:', window.location.pathname);
       
       // 自定义时间格式化函数
@@ -122,8 +122,8 @@
       // 初始化Waline
       const waline = window.WalineInit({
         el: '#waline-comment',
-        serverURL: 'https://leanvercelwaline.n2g.cn/',
-        path: window.location.pathname,
+        serverURL: 'https://tencent.n2g.cn/',
+        path: window.location.pathname.replace(/\/$/, '') || '/',
         placeholder: '请留下你的足迹~',
         avatar: 'monsterid',
         meta: ['nick', 'mail', 'link'],

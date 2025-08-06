@@ -1,1 +1,1 @@
-https://n2g.cn
+https://blog.n2g.cn

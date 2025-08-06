@@ -10,7 +10,7 @@ import { SITE } from "./src/config";
 
 
 export default defineConfig({
-  site: 'https://n2g.cn',
+  site: 'https://blog.n2g.cn',
   // base: 'my-repo',
   integrations: [
     /*tailwind({

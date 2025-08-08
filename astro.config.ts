@@ -12,6 +12,7 @@ import { SITE } from "./src/config";
 export default defineConfig({
   site: 'https://blog.n2g.cn',
   // base: 'my-repo',
+  trailingSlash: 'always',
   integrations: [
     /*tailwind({
       applyBaseStyles: false,
